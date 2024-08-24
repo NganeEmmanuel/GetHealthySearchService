@@ -23,4 +23,14 @@ public class SearchController {
     public ResponseEntity<List<SearchResult>> search(@RequestParam String term) {
         return ResponseEntity.ok(searchService.search(term));
     }
+
+    @GetMapping("/event")
+    public ResponseEntity<List<SearchResult>> searchEvent(@RequestParam String term) {
+        return ResponseEntity.ok(searchService.searchEvent(term));
+    }
+
+    @GetMapping("/illness-cycle")
+    public ResponseEntity<List<SearchResult>> searchIllnessCycle(@RequestParam String term) {
+        return ResponseEntity.ok(searchService.searchIllnessCycle(term));
+    }
 }
