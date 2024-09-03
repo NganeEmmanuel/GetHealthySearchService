@@ -1,18 +1,27 @@
 package com.gethealthy.searchservice.model;
 
+import com.gethealthy.searchservice.enums.EventType;
+import com.gethealthy.searchservice.enums.SourceType;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-
-import java.util.Date;
 
 @Data
 @AllArgsConstructor
-public class SearchResult {
-    private String title;
-    private String description;
-    private String source;  //from events or sickness cycle services
-    private Date dateAdded;
-    private String eventType; //if result is from the event service (Symptoms, hospital visit, medication administration
+@Builder
+public class SearchResult implements Comparable<SearchResult> {
+    private Long id;
+    private String title; //title of event or illness record (common property)
+    private String description; //description of event or illness record (common property)
+    private SourceType source;  //from events or illness record services
+    private String Status; //either the illness record status(started, ended) or the health status of the event
+    private EventType eventType; //if result is from the event service and what kind of event (Symptoms, hospital visit, medication administration)
+    private String dateStarted; // started date (common property)
 
-    public SearchResult(String title, String description, String source, Date dateAdded) {}
+    @Override
+    public int compareTo(SearchResult o) {
+        return this.id.compareTo(o.id);
+    }
+
+    //todo add pagination to search
 }

@@ -3,12 +3,10 @@ package com.gethealthy.searchservice.controller;
 import com.gethealthy.searchservice.model.SearchResult;
 import com.gethealthy.searchservice.service.SearchService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,18 +17,18 @@ import java.util.List;
 public class SearchController {
     private final SearchService searchService;
 
-    @GetMapping
-    public ResponseEntity<List<SearchResult>> search(@RequestParam String term) {
-        return ResponseEntity.ok(searchService.search(term));
+    @PostMapping("/all")
+    public ResponseEntity<List<SearchResult>> search(@RequestParam String term, @RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader) {
+        return ResponseEntity.ok(searchService.search(term, authorizationHeader));
     }
 
-    @GetMapping("/event")
-    public ResponseEntity<List<SearchResult>> searchEvent(@RequestParam String term) {
-        return ResponseEntity.ok(searchService.searchEvent(term));
+    @PostMapping("/events")
+    public ResponseEntity<List<SearchResult>> searchEvent(@RequestParam String term, @RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader) {
+        return ResponseEntity.ok(searchService.searchEvent(term, authorizationHeader));
     }
 
-    @GetMapping("/illness-cycle")
-    public ResponseEntity<List<SearchResult>> searchIllnessCycle(@RequestParam String term) {
-        return ResponseEntity.ok(searchService.searchIllnessCycle(term));
+    @PostMapping("/illness-records")
+    public ResponseEntity<List<SearchResult>> searchIllnessCycle(@RequestParam String term, @RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader) {
+        return ResponseEntity.ok(searchService.searchIllnessRecord(term, authorizationHeader));
     }
 }
