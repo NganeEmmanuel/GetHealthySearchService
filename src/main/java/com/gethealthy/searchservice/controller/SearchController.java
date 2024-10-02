@@ -19,16 +19,16 @@ public class SearchController {
 
     @PostMapping("/all")
     public ResponseEntity<List<SearchResult>> search(@RequestParam String term, @RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader) {
-        return ResponseEntity.ok(searchService.search(term, authorizationHeader));
+        return searchService.search(term, authorizationHeader);
     }
 
     @PostMapping("/events")
     public ResponseEntity<List<SearchResult>> searchEvent(@RequestParam String term, @RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader) {
-        return ResponseEntity.ok(searchService.searchEvent(term, authorizationHeader));
+        return searchService.searchEvent(term, authorizationHeader);
     }
 
     @PostMapping("/illness-records")
     public ResponseEntity<List<SearchResult>> searchIllnessCycle(@RequestParam String term, @RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader) {
-        return ResponseEntity.ok(searchService.searchIllnessRecord(term, authorizationHeader));
+        return searchService.searchIllnessRecord(term, authorizationHeader);
     }
 }
